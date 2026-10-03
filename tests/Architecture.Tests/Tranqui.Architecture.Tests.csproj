@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Api\Tranqui.Api.csproj" />
     <ProjectReference Include="..\..\src\Contracts\Tranqui.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\App.Core\Tranqui.App.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
