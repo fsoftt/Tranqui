@@ -157,6 +157,10 @@ namespace Tranqui.Infrastructure.Persistence.Migrations
                                 .HasColumnType("timestamp with time zone")
                                 .HasColumnName("accepted_at");
 
+                            b1.Property<DateTimeOffset?>("RevokedAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("revoked_at");
+
                             b1.Property<string>("Type")
                                 .IsRequired()
                                 .HasMaxLength(64)
