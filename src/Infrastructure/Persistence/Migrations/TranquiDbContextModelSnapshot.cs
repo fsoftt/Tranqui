@@ -22,6 +22,100 @@ namespace Tranqui.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Tranqui.Domain.Reputation.ContactContribution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("ContributedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("contributed_at");
+
+                    b.Property<byte[]>("ContributorId")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("contributor_id");
+
+                    b.Property<int>("HashKeyVersion")
+                        .HasColumnType("integer")
+                        .HasColumnName("hash_key_version");
+
+                    b.Property<byte[]>("NameCiphertext")
+                        .HasColumnType("bytea")
+                        .HasColumnName("name_ciphertext");
+
+                    b.Property<byte[]>("NameGroupingKey")
+                        .HasColumnType("bytea")
+                        .HasColumnName("name_grouping_key");
+
+                    b.Property<byte[]>("PhoneHash")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("phone_hash");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_contributions");
+
+                    b.HasIndex("PhoneHash", "ContributorId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_contact_contributions_phone_hash_contributor_id");
+
+                    b.ToTable("contact_contributions", (string)null);
+                });
+
+            modelBuilder.Entity("Tranqui.Domain.Reputation.SpamReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<byte[]>("ContributorId")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("contributor_id");
+
+                    b.Property<int>("HashKeyVersion")
+                        .HasColumnType("integer")
+                        .HasColumnName("hash_key_version");
+
+                    b.Property<byte[]>("LabelCiphertext")
+                        .HasColumnType("bytea")
+                        .HasColumnName("label_ciphertext");
+
+                    b.Property<byte[]>("LabelGroupingKey")
+                        .HasColumnType("bytea")
+                        .HasColumnName("label_grouping_key");
+
+                    b.Property<byte[]>("PhoneHash")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("phone_hash");
+
+                    b.Property<DateTimeOffset>("ReportedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("reported_at");
+
+                    b.Property<string>("Verdict")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("verdict");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision")
+                        .HasColumnName("weight");
+
+                    b.HasKey("Id")
+                        .HasName("pk_spam_reports");
+
+                    b.HasIndex("PhoneHash", "ContributorId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_spam_reports_phone_hash_contributor_id");
+
+                    b.ToTable("spam_reports", (string)null);
+                });
+
             modelBuilder.Entity("Tranqui.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
