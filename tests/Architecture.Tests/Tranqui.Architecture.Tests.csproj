@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\src\Api\Tranqui.Api.csproj" />
     <ProjectReference Include="..\..\src\Contracts\Tranqui.Contracts.csproj" />
     <ProjectReference Include="..\..\src\App.Core\Tranqui.App.Core.csproj" />
+    <ProjectReference Include="..\..\src\BackOffice\Tranqui.BackOffice.csproj" />
   </ItemGroup>
 
   <ItemGroup>
